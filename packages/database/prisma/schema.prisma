@@ -1,0 +1,1070 @@
+// ==============================================
+// KIDVERSE - Schéma de Base de Données
+// Écosystème Intelligent de Gestion de Garderies
+// ==============================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==============================================
+// ENUMS
+// ==============================================
+
+enum UserRole {
+  ADMIN
+  DIRECTOR
+  EDUCATOR
+  PARENT
+  STAFF
+}
+
+enum ChildStatus {
+  ACTIVE
+  INACTIVE
+  WAITLIST
+  GRADUATED
+  WITHDRAWN
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  SICK
+  VACATION
+  HOLIDAY
+}
+
+enum AllergySeverity {
+  MILD
+  MODERATE
+  SEVERE
+  LIFE_THREATENING
+}
+
+enum InvoiceStatus {
+  DRAFT
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  DEBIT
+  BANK_TRANSFER
+  CASH
+  CHECK
+  BLOCKCHAIN
+  SUBSIDY
+}
+
+enum LicenseStatus {
+  ACTIVE
+  PENDING
+  EXPIRED
+  SUSPENDED
+}
+
+enum InspectionResult {
+  PASSED
+  PASSED_WITH_OBSERVATIONS
+  FAILED
+  PENDING_REVIEW
+}
+
+enum IncidentSeverity {
+  MINOR
+  MODERATE
+  MAJOR
+  CRITICAL
+}
+
+enum ConsentType {
+  PHOTO_VIDEO
+  MEDICAL_TREATMENT
+  FIELD_TRIPS
+  SUNSCREEN
+  DIAPER_CREAM
+  DATA_SHARING
+  EMERGENCY_TRANSPORT
+}
+
+// ==============================================
+// 1. UTILISATEURS & AUTHENTIFICATION
+// ==============================================
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  passwordHash      String
+  firstName         String
+  lastName          String
+  phone             String?
+  role              UserRole  @default(PARENT)
+  isActive          Boolean   @default(true)
+  preferredLanguage String    @default("fr")
+  avatarUrl         String?
+  lastLoginAt       DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Relations
+  centerId          String?
+  center            Center?   @relation(fields: [centerId], references: [id])
+  
+  // En tant que parent
+  children          ChildParent[]
+  
+  // Staff relations
+  staff             Staff?
+  
+  // Messages
+  sentMessages      Message[]     @relation("SentMessages")
+  receivedMessages  MessageRecipient[]
+  
+  // Notifications
+  notifications     Notification[]
+  
+  // Audit
+  auditLogs         AuditLog[]
+
+  @@index([email])
+  @@index([centerId])
+}
+
+// ==============================================
+// 2. CENTRES & INFRASTRUCTURE
+// ==============================================
+
+model Center {
+  id            String    @id @default(cuid())
+  name          String
+  address       String
+  city          String
+  province      String
+  postalCode    String
+  country       String    @default("Canada")
+  phone         String
+  email         String
+  website       String?
+  capacity      Int
+  openingTime   String    @default("07:00")
+  closingTime   String    @default("18:00")
+  isActive      Boolean   @default(true)
+  logoUrl       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  users         User[]
+  staff         Staff[]
+  children      Child[]
+  classrooms    Classroom[]
+  licenses      License[]
+  inspections   Inspection[]
+  maintenanceRequests MaintenanceRequest[]
+  invoices      Invoice[]
+  subsidyApplications SubsidyApplication[]
+
+  @@index([city])
+}
+
+model Classroom {
+  id            String    @id @default(cuid())
+  name          String
+  ageGroupMin   Int       // Âge minimum en mois
+  ageGroupMax   Int       // Âge maximum en mois
+  capacity      Int
+  description   String?
+  color         String?   // Pour UI
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  centerId      String
+  center        Center    @relation(fields: [centerId], references: [id])
+  children      Child[]
+  staffAssignments StaffClassroom[]
+  activities    Activity[]
+  schedules     ClassroomSchedule[]
+
+  @@index([centerId])
+}
+
+model ClassroomSchedule {
+  id            String    @id @default(cuid())
+  dayOfWeek     Int       // 0-6 (Dimanche-Samedi)
+  startTime     String
+  endTime       String
+  activityType  String    // Repas, Sieste, Activité, etc.
+  description   String?
+  createdAt     DateTime  @default(now())
+
+  classroomId   String
+  classroom     Classroom @relation(fields: [classroomId], references: [id])
+
+  @@index([classroomId])
+}
+
+// ==============================================
+// 3. ENFANTS & FAMILLES
+// ==============================================
+
+model Child {
+  id              String      @id @default(cuid())
+  firstName       String
+  lastName        String
+  dateOfBirth     DateTime
+  gender          Gender
+  photoUrl        String?
+  status          ChildStatus @default(ACTIVE)
+  enrollmentDate  DateTime    @default(now())
+  withdrawalDate  DateTime?
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  centerId        String
+  center          Center      @relation(fields: [centerId], references: [id])
+  classroomId     String?
+  classroom       Classroom?  @relation(fields: [classroomId], references: [id])
+
+  // Famille
+  parents         ChildParent[]
+  emergencyContacts EmergencyContact[]
+  authorizedPickups AuthorizedPickup[]
+
+  // Santé
+  allergies       Allergy[]
+  medications     Medication[]
+  vaccinations    Vaccination[]
+  healthProfiles  HealthProfile[]
+  medicalIncidents MedicalIncident[]
+  dailyHealthChecks DailyHealthCheck[]
+
+  // Présences
+  attendance      Attendance[]
+
+  // Pédagogie
+  observations    Observation[]
+  milestones      ChildMilestone[]
+  portfolioItems  PortfolioItem[]
+  activityParticipations ActivityParticipation[]
+
+  // Finance
+  invoices        Invoice[]
+  subsidies       ChildSubsidy[]
+
+  // Blockchain
+  digitalIdentity DigitalIdentity?
+  consents        Consent[]
+
+  @@index([centerId])
+  @@index([classroomId])
+  @@index([status])
+}
+
+model ChildParent {
+  id            String    @id @default(cuid())
+  relationship  String    // Mère, Père, Tuteur, etc.
+  isPrimary     Boolean   @default(false)
+  canPickup     Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+
+  childId       String
+  child         Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+  parentId      String
+  parent        User      @relation(fields: [parentId], references: [id])
+
+  @@unique([childId, parentId])
+  @@index([parentId])
+}
+
+model EmergencyContact {
+  id            String    @id @default(cuid())
+  name          String
+  relationship  String
+  phone         String
+  phoneAlt      String?
+  email         String?
+  priority      Int       @default(1)
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  childId       String
+  child         Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+}
+
+model AuthorizedPickup {
+  id            String    @id @default(cuid())
+  name          String
+  relationship  String
+  phone         String
+  photoUrl      String?
+  idDocumentUrl String?
+  isActive      Boolean   @default(true)
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  childId       String
+  child         Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+  
+  pickups       Attendance[] @relation("AuthorizedPickupRelation")
+
+  @@index([childId])
+}
+
+// ==============================================
+// 4. PERSONNEL
+// ==============================================
+
+model Staff {
+  id              String    @id @default(cuid())
+  employeeNumber  String?   @unique
+  position        String
+  hireDate        DateTime
+  terminationDate DateTime?
+  hourlyRate      Decimal?  @db.Decimal(10, 2)
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id])
+  centerId        String
+  center          Center    @relation(fields: [centerId], references: [id])
+
+  qualifications  StaffQualification[]
+  classrooms      StaffClassroom[]
+  schedules       StaffSchedule[]
+  timeEntries     TimeEntry[]
+
+  @@index([centerId])
+}
+
+model StaffQualification {
+  id              String    @id @default(cuid())
+  qualificationType String  // Diplôme, Certification, Formation
+  name            String
+  issuer          String?
+  issueDate       DateTime
+  expiryDate      DateTime?
+  documentUrl     String?
+  isVerified      Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+
+  staffId         String
+  staff           Staff     @relation(fields: [staffId], references: [id], onDelete: Cascade)
+
+  @@index([staffId])
+}
+
+model StaffClassroom {
+  id            String    @id @default(cuid())
+  isPrimary     Boolean   @default(false)
+  startDate     DateTime  @default(now())
+  endDate       DateTime?
+  createdAt     DateTime  @default(now())
+
+  staffId       String
+  staff         Staff     @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  classroomId   String
+  classroom     Classroom @relation(fields: [classroomId], references: [id])
+
+  @@unique([staffId, classroomId])
+}
+
+model StaffSchedule {
+  id            String    @id @default(cuid())
+  dayOfWeek     Int
+  startTime     String
+  endTime       String
+  isRecurring   Boolean   @default(true)
+  effectiveDate DateTime  @default(now())
+  endDate       DateTime?
+  createdAt     DateTime  @default(now())
+
+  staffId       String
+  staff         Staff     @relation(fields: [staffId], references: [id], onDelete: Cascade)
+
+  @@index([staffId])
+}
+
+model TimeEntry {
+  id            String    @id @default(cuid())
+  date          DateTime
+  clockIn       DateTime
+  clockOut      DateTime?
+  breakMinutes  Int       @default(0)
+  notes         String?
+  isApproved    Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  staffId       String
+  staff         Staff     @relation(fields: [staffId], references: [id])
+
+  @@index([staffId])
+  @@index([date])
+}
+
+// ==============================================
+// 5. SANTÉ & SÉCURITÉ
+// ==============================================
+
+model Allergy {
+  id            String          @id @default(cuid())
+  allergen      String
+  severity      AllergySeverity
+  reactions     String?
+  treatment     String?
+  diagnosedDate DateTime?
+  doctorName    String?
+  notes         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  childId       String
+  child         Child           @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+}
+
+model Medication {
+  id              String    @id @default(cuid())
+  name            String
+  dosage          String
+  frequency       String
+  administrationRoute String // Oral, Topique, etc.
+  startDate       DateTime
+  endDate         DateTime?
+  prescribedBy    String?
+  pharmacyName    String?
+  pharmacyPhone   String?
+  specialInstructions String?
+  requiresRefrigeration Boolean @default(false)
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+  administrations MedicationAdministration[]
+
+  @@index([childId])
+}
+
+model MedicationAdministration {
+  id              String    @id @default(cuid())
+  administeredAt  DateTime
+  dosageGiven     String
+  notes           String?
+  administeredBy  String
+  witnessedBy     String?
+  createdAt       DateTime  @default(now())
+
+  medicationId    String
+  medication      Medication @relation(fields: [medicationId], references: [id])
+
+  @@index([medicationId])
+}
+
+model Vaccination {
+  id              String    @id @default(cuid())
+  vaccineName     String
+  doseNumber      Int       @default(1)
+  administeredDate DateTime
+  administeredBy  String?
+  lotNumber       String?
+  nextDueDate     DateTime?
+  documentUrl     String?
+  notes           String?
+  createdAt       DateTime  @default(now())
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+}
+
+model HealthProfile {
+  id              String    @id @default(cuid())
+  bloodType       String?
+  height          Decimal?  @db.Decimal(5, 2) // cm
+  weight          Decimal?  @db.Decimal(5, 2) // kg
+  medicalConditions String?
+  dietaryRestrictions String?
+  sleepHabits     String?
+  toiletTraining  String?
+  developmentalNotes String?
+  physicianName   String?
+  physicianPhone  String?
+  insuranceInfo   String?
+  recordedAt      DateTime  @default(now())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+}
+
+model DailyHealthCheck {
+  id              String    @id @default(cuid())
+  date            DateTime  @default(now())
+  temperature     Decimal?  @db.Decimal(4, 2)
+  symptoms        String?
+  mood            String?
+  appetiteLevel   String?
+  sleepQuality    String?
+  notes           String?
+  checkedBy       String
+  parentNotified  Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+  @@index([date])
+}
+
+model MedicalIncident {
+  id              String           @id @default(cuid())
+  incidentDate    DateTime
+  incidentType    String           // Blessure, Maladie, Réaction allergique
+  severity        IncidentSeverity
+  description     String
+  actionTaken     String
+  witnesses       String?
+  parentNotified  Boolean          @default(false)
+  parentNotifiedAt DateTime?
+  medicalAttention Boolean         @default(false)
+  followUpRequired Boolean         @default(false)
+  followUpNotes   String?
+  reportedBy      String
+  documentUrls    String[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  childId         String
+  child           Child            @relation(fields: [childId], references: [id])
+
+  @@index([childId])
+  @@index([incidentDate])
+}
+
+// ==============================================
+// 6. PRÉSENCES
+// ==============================================
+
+model Attendance {
+  id                String           @id @default(cuid())
+  date              DateTime
+  status            AttendanceStatus @default(PRESENT)
+  scheduledArrival  String?
+  scheduledDeparture String?
+  checkInTime       DateTime?
+  checkOutTime      DateTime?
+  checkedInBy       String?
+  checkedOutBy      String?
+  lateReason        String?
+  absenceReason     String?
+  notes             String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  childId           String
+  child             Child            @relation(fields: [childId], references: [id])
+  authorizedPickupId String?
+  authorizedPickup  AuthorizedPickup? @relation("AuthorizedPickupRelation", fields: [authorizedPickupId], references: [id])
+
+  @@unique([childId, date])
+  @@index([date])
+}
+
+// ==============================================
+// 7. PÉDAGOGIE & ACTIVITÉS
+// ==============================================
+
+model Activity {
+  id              String    @id @default(cuid())
+  name            String
+  description     String?
+  learningArea    String    // Cognitive, Social, Physique, etc.
+  ageGroupMin     Int?
+  ageGroupMax     Int?
+  duration        Int?      // Minutes
+  materials       String?
+  objectives      String?
+  instructions    String?
+  photoUrls       String[]
+  isTemplate      Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  classroomId     String?
+  classroom       Classroom? @relation(fields: [classroomId], references: [id])
+  
+  participations  ActivityParticipation[]
+  curriculumItems CurriculumActivity[]
+
+  @@index([classroomId])
+}
+
+model ActivityParticipation {
+  id              String    @id @default(cuid())
+  participatedAt  DateTime  @default(now())
+  engagement      String?   // Élevé, Moyen, Faible
+  notes           String?
+  photoUrls       String[]
+  createdAt       DateTime  @default(now())
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id])
+  activityId      String
+  activity        Activity  @relation(fields: [activityId], references: [id])
+
+  @@index([childId])
+  @@index([activityId])
+}
+
+model Observation {
+  id              String    @id @default(cuid())
+  observedAt      DateTime  @default(now())
+  observationType String    // Anecdote, Milestone, Comportement
+  learningArea    String?
+  description     String
+  context         String?
+  photoUrls       String[]
+  isSharedWithParent Boolean @default(false)
+  observedBy      String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id])
+
+  @@index([childId])
+  @@index([observedAt])
+}
+
+model Milestone {
+  id              String    @id @default(cuid())
+  name            String
+  description     String?
+  learningArea    String
+  ageRangeMin     Int       // Mois
+  ageRangeMax     Int
+  indicators      String[]
+  isDefault       Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+
+  childMilestones ChildMilestone[]
+
+  @@index([learningArea])
+}
+
+model ChildMilestone {
+  id              String    @id @default(cuid())
+  achievedAt      DateTime?
+  status          String    @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, ACHIEVED
+  notes           String?
+  evidenceUrls    String[]
+  recordedBy      String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id])
+  milestoneId     String
+  milestone       Milestone @relation(fields: [milestoneId], references: [id])
+
+  @@unique([childId, milestoneId])
+}
+
+model PortfolioItem {
+  id              String    @id @default(cuid())
+  title           String
+  description     String?
+  itemType        String    // Photo, Vidéo, Document, Artwork
+  fileUrl         String
+  thumbnailUrl    String?
+  learningArea    String?
+  isHighlight     Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id])
+
+  @@index([childId])
+}
+
+model Curriculum {
+  id              String    @id @default(cuid())
+  name            String
+  description     String?
+  ageGroupMin     Int
+  ageGroupMax     Int
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  activities      CurriculumActivity[]
+}
+
+model CurriculumActivity {
+  id              String    @id @default(cuid())
+  weekNumber      Int?
+  dayOfWeek       Int?
+  sequence        Int       @default(0)
+  createdAt       DateTime  @default(now())
+
+  curriculumId    String
+  curriculum      Curriculum @relation(fields: [curriculumId], references: [id])
+  activityId      String
+  activity        Activity   @relation(fields: [activityId], references: [id])
+
+  @@index([curriculumId])
+}
+
+// ==============================================
+// 8. FINANCES
+// ==============================================
+
+model Invoice {
+  id              String        @id @default(cuid())
+  invoiceNumber   String        @unique
+  issueDate       DateTime      @default(now())
+  dueDate         DateTime
+  subtotal        Decimal       @db.Decimal(10, 2)
+  taxes           Decimal       @default(0) @db.Decimal(10, 2)
+  discounts       Decimal       @default(0) @db.Decimal(10, 2)
+  total           Decimal       @db.Decimal(10, 2)
+  status          InvoiceStatus @default(PENDING)
+  notes           String?
+  paidAt          DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  centerId        String
+  center          Center        @relation(fields: [centerId], references: [id])
+  childId         String
+  child           Child         @relation(fields: [childId], references: [id])
+
+  items           InvoiceItem[]
+  payments        Payment[]
+
+  @@index([centerId])
+  @@index([childId])
+  @@index([status])
+}
+
+model InvoiceItem {
+  id              String    @id @default(cuid())
+  description     String
+  quantity        Int       @default(1)
+  unitPrice       Decimal   @db.Decimal(10, 2)
+  total           Decimal   @db.Decimal(10, 2)
+  periodStart     DateTime?
+  periodEnd       DateTime?
+  createdAt       DateTime  @default(now())
+
+  invoiceId       String
+  invoice         Invoice   @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@index([invoiceId])
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  amount          Decimal       @db.Decimal(10, 2)
+  paymentMethod   PaymentMethod
+  paymentDate     DateTime      @default(now())
+  transactionId   String?
+  blockchainTxHash String?
+  notes           String?
+  createdAt       DateTime      @default(now())
+
+  invoiceId       String
+  invoice         Invoice       @relation(fields: [invoiceId], references: [id])
+
+  @@index([invoiceId])
+}
+
+model SubsidyProgram {
+  id              String    @id @default(cuid())
+  name            String
+  description     String?
+  governmentBody  String
+  maxAmount       Decimal?  @db.Decimal(10, 2)
+  eligibilityCriteria String?
+  documentationRequired String?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  applications    SubsidyApplication[]
+  childSubsidies  ChildSubsidy[]
+}
+
+model SubsidyApplication {
+  id              String    @id @default(cuid())
+  applicationDate DateTime  @default(now())
+  status          String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  approvedAmount  Decimal?  @db.Decimal(10, 2)
+  approvalDate    DateTime?
+  expiryDate      DateTime?
+  notes           String?
+  documentUrls    String[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  centerId        String
+  center          Center    @relation(fields: [centerId], references: [id])
+  programId       String
+  program         SubsidyProgram @relation(fields: [programId], references: [id])
+
+  @@index([centerId])
+}
+
+model ChildSubsidy {
+  id              String    @id @default(cuid())
+  dailyRate       Decimal   @db.Decimal(10, 2)
+  startDate       DateTime
+  endDate         DateTime?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+
+  childId         String
+  child           Child     @relation(fields: [childId], references: [id])
+  programId       String
+  program         SubsidyProgram @relation(fields: [programId], references: [id])
+
+  @@index([childId])
+}
+
+// ==============================================
+// 9. CONFORMITÉ & LICENCES
+// ==============================================
+
+model License {
+  id              String        @id @default(cuid())
+  licenseNumber   String
+  licenseType     String
+  issuingAuthority String
+  issueDate       DateTime
+  expiryDate      DateTime
+  status          LicenseStatus @default(ACTIVE)
+  capacity        Int?
+  conditions      String?
+  documentUrl     String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  centerId        String
+  center          Center        @relation(fields: [centerId], references: [id])
+
+  @@index([centerId])
+}
+
+model Inspection {
+  id              String           @id @default(cuid())
+  inspectionDate  DateTime
+  inspectorName   String
+  inspectorOrg    String
+  inspectionType  String           // Routine, Complaint, Follow-up
+  result          InspectionResult
+  score           Int?
+  findings        String?
+  correctiveActions String?
+  followUpDate    DateTime?
+  reportUrl       String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  centerId        String
+  center          Center           @relation(fields: [centerId], references: [id])
+
+  @@index([centerId])
+  @@index([inspectionDate])
+}
+
+model MaintenanceRequest {
+  id              String    @id @default(cuid())
+  title           String
+  description     String
+  priority        String    @default("MEDIUM") // LOW, MEDIUM, HIGH, URGENT
+  status          String    @default("OPEN") // OPEN, IN_PROGRESS, COMPLETED, CANCELLED
+  location        String?
+  requestedBy     String
+  assignedTo      String?
+  estimatedCost   Decimal?  @db.Decimal(10, 2)
+  actualCost      Decimal?  @db.Decimal(10, 2)
+  completedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  centerId        String
+  center          Center    @relation(fields: [centerId], references: [id])
+
+  @@index([centerId])
+  @@index([status])
+}
+
+// ==============================================
+// 10. COMMUNICATION
+// ==============================================
+
+model Message {
+  id              String    @id @default(cuid())
+  subject         String?
+  content         String
+  isUrgent        Boolean   @default(false)
+  attachmentUrls  String[]
+  sentAt          DateTime  @default(now())
+  createdAt       DateTime  @default(now())
+
+  senderId        String
+  sender          User      @relation("SentMessages", fields: [senderId], references: [id])
+  
+  recipients      MessageRecipient[]
+
+  @@index([senderId])
+}
+
+model MessageRecipient {
+  id              String    @id @default(cuid())
+  readAt          DateTime?
+  createdAt       DateTime  @default(now())
+
+  messageId       String
+  message         Message   @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  recipientId     String
+  recipient       User      @relation(fields: [recipientId], references: [id])
+
+  @@unique([messageId, recipientId])
+  @@index([recipientId])
+}
+
+model Notification {
+  id              String    @id @default(cuid())
+  type            String    // ATTENDANCE, HEALTH, PAYMENT, MESSAGE, ALERT
+  title           String
+  body            String
+  data            Json?
+  isRead          Boolean   @default(false)
+  readAt          DateTime?
+  createdAt       DateTime  @default(now())
+
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([isRead])
+}
+
+// ==============================================
+// 11. BLOCKCHAIN & IDENTITÉ NUMÉRIQUE
+// ==============================================
+
+model DigitalIdentity {
+  id              String    @id @default(cuid())
+  walletAddress   String?   @unique
+  identityHash    String    @unique
+  tokenId         String?
+  mintedAt        DateTime?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  childId         String    @unique
+  child           Child     @relation(fields: [childId], references: [id])
+
+  transactions    BlockchainTransaction[]
+}
+
+model Consent {
+  id              String      @id @default(cuid())
+  consentType     ConsentType
+  granted         Boolean
+  grantedBy       String      // Parent ID
+  grantedAt       DateTime    @default(now())
+  expiresAt       DateTime?
+  revokedAt       DateTime?
+  blockchainTxHash String?
+  ipAddress       String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  childId         String
+  child           Child       @relation(fields: [childId], references: [id])
+
+  @@index([childId])
+  @@index([consentType])
+}
+
+model BlockchainTransaction {
+  id              String    @id @default(cuid())
+  transactionHash String    @unique
+  transactionType String    // CONSENT, PAYMENT, IDENTITY, DOCUMENT
+  status          String    @default("PENDING") // PENDING, CONFIRMED, FAILED
+  blockNumber     Int?
+  gasUsed         String?
+  data            Json?
+  createdAt       DateTime  @default(now())
+  confirmedAt     DateTime?
+
+  digitalIdentityId String?
+  digitalIdentity DigitalIdentity? @relation(fields: [digitalIdentityId], references: [id])
+
+  @@index([transactionType])
+}
+
+// ==============================================
+// 12. AUDIT & LOGS
+// ==============================================
+
+model AuditLog {
+  id              String    @id @default(cuid())
+  action          String    // CREATE, UPDATE, DELETE, LOGIN, etc.
+  entityType      String    // User, Child, Attendance, etc.
+  entityId        String?
+  oldValues       Json?
+  newValues       Json?
+  ipAddress       String?
+  userAgent       String?
+  createdAt       DateTime  @default(now())
+
+  userId          String?
+  user            User?     @relation(fields: [userId], references: [id])
+
+  @@index([entityType])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+

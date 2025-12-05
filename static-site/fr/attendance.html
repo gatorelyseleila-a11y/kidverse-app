@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Présences | KIDVERSE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { 'brand-blue': '#2563EB', 'brand-blue-dark': '#1D4ED8' }}}}</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <script src="../js/navigation.js"></script>
+  
+  <main class="p-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+      <div>
+        <nav class="text-sm text-gray-500 mb-2">
+          <a href="../index.html" class="hover:text-brand-blue">Accueil</a> / 
+          <span class="text-gray-900">Présences</span>
+        </nav>
+        <h1 class="text-2xl font-bold text-gray-900">Gestion des présences</h1>
+        <p class="text-gray-500">Check-in/Check-out des enfants</p>
+      </div>
+      <a href="kiosk.html" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-blue text-white rounded-xl font-medium hover:bg-brand-blue-dark transition-colors">
+        <i class="fas fa-tablet-alt"></i>
+        Mode Kiosque
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-4 mb-6">
+      <div class="bg-green-50 rounded-xl p-4 text-center">
+        <p class="text-3xl font-bold text-green-600">45</p>
+        <p class="text-sm text-green-700">Présents</p>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-4 text-center border border-gray-200">
+        <p class="text-3xl font-bold text-gray-600">12</p>
+        <p class="text-sm text-gray-500">Absents</p>
+      </div>
+      <div class="bg-amber-50 rounded-xl p-4 text-center">
+        <p class="text-3xl font-bold text-amber-600">3</p>
+        <p class="text-sm text-amber-700">En retard</p>
+      </div>
+    </div>
+
+    <!-- Attendance List -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="p-4 border-b border-gray-100">
+        <input type="text" placeholder="Rechercher..." class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg">
+      </div>
+      <div class="divide-y divide-gray-100">
+        <div class="flex items-center justify-between p-4 hover:bg-gray-50">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold">E</div>
+            <div>
+              <p class="font-medium text-gray-900">Emma Dupont</p>
+              <p class="text-sm text-gray-500">Les Explorateurs</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-green-600">Arrivée: 08:15</span>
+            <button class="px-4 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors">
+              <i class="fas fa-sign-out-alt mr-2"></i>Départ
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center justify-between p-4 hover:bg-gray-50">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">L</div>
+            <div>
+              <p class="font-medium text-gray-900">Lucas Martin</p>
+              <p class="text-sm text-gray-500">Les Aventuriers</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-400">Non arrivé</span>
+            <button class="px-4 py-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors">
+              <i class="fas fa-sign-in-alt mr-2"></i>Arrivée
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>initNavigation('attendance', 'Présences', 'Quotidien');</script>
+</body>
+</html>
+

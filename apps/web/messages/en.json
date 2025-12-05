@@ -1,0 +1,258 @@
+{
+  "common": {
+    "appName": "KIDVERSE",
+    "tagline": "The intelligent universe that grows with your children",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "all": "All",
+    "none": "None",
+    "actions": "Actions",
+    "status": "Status",
+    "date": "Date",
+    "time": "Time",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow"
+  },
+  "auth": {
+    "login": "Log in",
+    "logout": "Log out",
+    "register": "Sign up",
+    "forgotPassword": "Forgot password?",
+    "resetPassword": "Reset password",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "rememberMe": "Remember me",
+    "loginTitle": "Log in to KIDVERSE",
+    "loginSubtitle": "Enter your credentials to access your account",
+    "registerTitle": "Create an account",
+    "registerSubtitle": "Join the KIDVERSE ecosystem",
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "emailRequired": "Email is required",
+      "passwordRequired": "Password is required",
+      "passwordMismatch": "Passwords do not match",
+      "emailInvalid": "Invalid email format"
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "children": "Children",
+    "staff": "Staff",
+    "parents": "Parents",
+    "attendance": "Attendance",
+    "health": "Health",
+    "pedagogy": "Pedagogy",
+    "finance": "Finance",
+    "reports": "Reports",
+    "settings": "Settings",
+    "help": "Help",
+    "centers": "Centers",
+    "calendar": "Calendar",
+    "messages": "Messages",
+    "notifications": "Notifications"
+  },
+  "roles": {
+    "admin": "Administrator",
+    "director": "Director",
+    "educator": "Educator",
+    "parent": "Parent",
+    "staff": "Staff"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {name}",
+    "overview": "Overview",
+    "quickActions": "Quick Actions",
+    "recentActivity": "Recent Activity",
+    "stats": {
+      "childrenPresent": "Children present",
+      "totalChildren": "Enrolled children",
+      "staffPresent": "Staff present",
+      "occupancyRate": "Occupancy rate",
+      "pendingPayments": "Pending payments",
+      "monthlyRevenue": "Monthly revenue",
+      "activeAlerts": "Active alerts"
+    },
+    "parent": {
+      "title": "Parent Dashboard",
+      "myChildren": "My children",
+      "todayActivities": "Today's activities",
+      "upcomingEvents": "Upcoming events",
+      "messages": "Messages",
+      "payments": "Payments",
+      "photos": "Today's photos"
+    },
+    "educator": {
+      "title": "Educator Dashboard",
+      "myGroup": "My group",
+      "attendance": "Attendance",
+      "activities": "Activities",
+      "observations": "Observations",
+      "meals": "Meals",
+      "naps": "Naps"
+    },
+    "director": {
+      "title": "Director Dashboard",
+      "centerOverview": "Center overview",
+      "staffManagement": "Staff management",
+      "compliance": "Compliance",
+      "finances": "Finances"
+    }
+  },
+  "children": {
+    "title": "Children Management",
+    "addChild": "Add a child",
+    "profile": "Profile",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "dateOfBirth": "Date of birth",
+    "age": "Age",
+    "gender": "Gender",
+    "group": "Group",
+    "enrollmentDate": "Enrollment date",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "waitlist": "Waitlist",
+      "graduated": "Graduated"
+    },
+    "tabs": {
+      "info": "Information",
+      "health": "Health",
+      "contacts": "Contacts",
+      "documents": "Documents",
+      "pedagogy": "Pedagogy",
+      "billing": "Billing"
+    }
+  },
+  "health": {
+    "title": "Health & Safety",
+    "allergies": "Allergies",
+    "medications": "Medications",
+    "vaccinations": "Vaccinations",
+    "emergencyContacts": "Emergency contacts",
+    "medicalNotes": "Medical notes",
+    "dailyHealth": "Daily health",
+    "incidents": "Incidents",
+    "noAllergies": "No known allergies",
+    "addAllergy": "Add allergy",
+    "severity": {
+      "mild": "Mild",
+      "moderate": "Moderate",
+      "severe": "Severe",
+      "lifeThreatening": "Life-threatening"
+    }
+  },
+  "attendance": {
+    "title": "Attendance Management",
+    "checkIn": "Check in",
+    "checkOut": "Check out",
+    "present": "Present",
+    "absent": "Absent",
+    "late": "Late",
+    "pickedUp": "Picked up",
+    "expectedArrival": "Expected arrival",
+    "actualArrival": "Actual arrival",
+    "expectedDeparture": "Expected departure",
+    "actualDeparture": "Actual departure",
+    "authorizedPickup": "Authorized pickup",
+    "notes": "Notes"
+  },
+  "pedagogy": {
+    "title": "Pedagogy",
+    "activities": "Activities",
+    "observations": "Observations",
+    "milestones": "Developmental milestones",
+    "portfolio": "Portfolio",
+    "curriculum": "Curriculum",
+    "learningAreas": {
+      "cognitive": "Cognitive",
+      "social": "Social",
+      "emotional": "Emotional",
+      "physical": "Physical",
+      "language": "Language",
+      "creative": "Creative"
+    }
+  },
+  "finance": {
+    "title": "Finance",
+    "invoices": "Invoices",
+    "payments": "Payments",
+    "subsidies": "Subsidies",
+    "createInvoice": "Create invoice",
+    "amount": "Amount",
+    "dueDate": "Due date",
+    "paidDate": "Paid date",
+    "status": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "overdue": "Overdue",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "noNotifications": "No notifications",
+    "types": {
+      "attendance": "Attendance",
+      "health": "Health",
+      "payment": "Payment",
+      "message": "Message",
+      "alert": "Alert",
+      "reminder": "Reminder"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": "My profile",
+    "security": "Security",
+    "notifications": "Notifications",
+    "language": "Language",
+    "theme": "Theme",
+    "center": "Center",
+    "billing": "Billing",
+    "integrations": "Integrations",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "errors": {
+    "generic": "An error occurred",
+    "notFound": "Page not found",
+    "unauthorized": "Unauthorized access",
+    "forbidden": "Access forbidden",
+    "serverError": "Server error",
+    "networkError": "Network error",
+    "validation": "Validation error"
+  },
+  "success": {
+    "saved": "Saved successfully",
+    "deleted": "Deleted successfully",
+    "updated": "Updated successfully",
+    "created": "Created successfully",
+    "sent": "Sent successfully"
+  }
+}
+
+

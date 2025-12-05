@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personnel | KIDVERSE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { 'brand-blue': '#2563EB', 'brand-blue-dark': '#1D4ED8' }}}}</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <script src="../js/navigation.js"></script>
+  
+  <main class="p-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+      <div>
+        <nav class="text-sm text-gray-500 mb-2">
+          <a href="../index.html" class="hover:text-brand-blue">Accueil</a> / 
+          <span class="text-gray-900">Personnel</span>
+        </nav>
+        <h1 class="text-2xl font-bold text-gray-900">Gestion du personnel</h1>
+        <p class="text-gray-500">Équipe et horaires</p>
+      </div>
+      <div class="flex gap-3">
+        <a href="staff-schedule.html" class="inline-flex items-center gap-2 px-4 py-2.5 border border-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors">
+          <i class="fas fa-calendar-alt"></i>
+          Planning
+        </a>
+        <button class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-blue text-white rounded-xl font-medium hover:bg-brand-blue-dark transition-colors">
+          <i class="fas fa-plus"></i>
+          Ajouter
+        </button>
+      </div>
+    </div>
+
+    <!-- Staff Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-brand-blue to-purple-600 flex items-center justify-center text-white text-xl font-bold">MT</div>
+          <div>
+            <h3 class="font-semibold text-gray-900">Marie Tremblay</h3>
+            <p class="text-sm text-gray-500">Éducatrice principale</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-green-600 flex items-center gap-1">
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+            En service
+          </span>
+          <span class="text-gray-500">Les Explorateurs</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-white text-xl font-bold">SM</div>
+          <div>
+            <h3 class="font-semibold text-gray-900">Sophie Martin</h3>
+            <p class="text-sm text-gray-500">Éducatrice</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-green-600 flex items-center gap-1">
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+            En service
+          </span>
+          <span class="text-gray-500">Les Aventuriers</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-xl font-bold">JL</div>
+          <div>
+            <h3 class="font-semibold text-gray-900">Jean Lavoie</h3>
+            <p class="text-sm text-gray-500">Éducateur</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-gray-400 flex items-center gap-1">
+            <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
+            Repos
+          </span>
+          <span class="text-gray-500">Les Bambins</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>initNavigation('staff', 'Personnel', 'Ressources');</script>
+</body>
+</html>
+

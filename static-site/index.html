@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIDVERSE - Application de gestion pour garderies</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-blue': '#2563EB',
+            'brand-blue-dark': '#1D4ED8',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <header class="gradient-bg text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-5xl font-bold mb-4">🏒 KIDVERSE</h1>
+      <p class="text-xl opacity-90 mb-8">Application de gestion pour garderies</p>
+      <div class="flex justify-center gap-4">
+        <a href="fr/login.html" class="px-6 py-3 bg-white text-brand-blue rounded-xl font-semibold hover:bg-gray-100 transition-colors">
+          <i class="fas fa-sign-in-alt mr-2"></i>Connexion
+        </a>
+        <a href="fr/register.html" class="px-6 py-3 bg-white/20 text-white rounded-xl font-semibold hover:bg-white/30 transition-colors border border-white/30">
+          <i class="fas fa-user-plus mr-2"></i>Inscription
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="container mx-auto px-6 -mt-8">
+    <div class="bg-white rounded-2xl shadow-xl p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="text-center">
+        <div class="text-3xl font-bold text-brand-blue">44</div>
+        <div class="text-gray-500 text-sm">Pages</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-purple-600">13</div>
+        <div class="text-gray-500 text-sm">Catégories</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-green-600">FR/EN</div>
+        <div class="text-gray-500 text-sm">Bilingue</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-amber-600">PWA</div>
+        <div class="text-gray-500 text-sm">Mobile Ready</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <main class="container mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">📋 Table des matières</h2>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Authentification -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-blue-100 rounded-xl">
+            <i class="fas fa-lock text-blue-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Authentification</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/login.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Connexion</a></li>
+          <li><a href="fr/register.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Inscription</a></li>
+          <li><a href="fr/forgot-password.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Mot de passe oublié</a></li>
+        </ul>
+      </div>
+
+      <!-- Dashboard & Analytics -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-purple-100 rounded-xl">
+            <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Dashboard & Analytics</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/dashboard.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Tableau de bord</a></li>
+          <li><a href="fr/analytics.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Analytics</a></li>
+        </ul>
+      </div>
+
+      <!-- Gestion des enfants -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-pink-100 rounded-xl">
+            <i class="fas fa-baby text-pink-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Gestion des enfants</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/children.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Liste des enfants</a></li>
+          <li><a href="fr/children-new.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Nouvel enfant</a></li>
+          <li><a href="fr/children-profile.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Profil enfant</a></li>
+          <li><a href="fr/children-progress.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Suivi développement</a></li>
+          <li><a href="fr/waitlist.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Liste d'attente</a></li>
+          <li><a href="fr/classrooms.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Gestion des classes</a></li>
+        </ul>
+      </div>
+
+      <!-- Présences & Quotidien -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-green-100 rounded-xl">
+            <i class="fas fa-calendar-check text-green-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Présences & Quotidien</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/attendance.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Présences</a></li>
+          <li><a href="fr/absences.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Absences</a></li>
+          <li><a href="fr/visitors.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Visiteurs</a></li>
+          <li><a href="fr/daily-report.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Rapport journalier</a></li>
+          <li><a href="fr/incidents.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Incidents</a></li>
+        </ul>
+      </div>
+
+      <!-- Services & Stock -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-amber-100 rounded-xl">
+            <i class="fas fa-utensils text-amber-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Services & Stock</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/meals.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Repas</a></li>
+          <li><a href="fr/inventory.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Inventaire</a></li>
+        </ul>
+      </div>
+
+      <!-- Personnel -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-indigo-100 rounded-xl">
+            <i class="fas fa-users text-indigo-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Personnel</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/staff.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Personnel</a></li>
+          <li><a href="fr/staff-schedule.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Planning</a></li>
+          <li><a href="fr/staff-evaluations.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Évaluations</a></li>
+        </ul>
+      </div>
+
+      <!-- Santé & Pédagogie -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-red-100 rounded-xl">
+            <i class="fas fa-heart text-red-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Santé & Pédagogie</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/health.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Santé</a></li>
+          <li><a href="fr/emergency.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Urgences</a></li>
+          <li><a href="fr/pedagogy.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Pédagogie</a></li>
+        </ul>
+      </div>
+
+      <!-- Communication -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-cyan-100 rounded-xl">
+            <i class="fas fa-comments text-cyan-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Communication</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/messages.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Messages</a></li>
+          <li><a href="fr/calendar.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Calendrier</a></li>
+          <li><a href="fr/documents.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Documents</a></li>
+        </ul>
+      </div>
+
+      <!-- Finances -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-emerald-100 rounded-xl">
+            <i class="fas fa-dollar-sign text-emerald-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Finances</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/finance.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Finances</a></li>
+          <li><a href="fr/invoices.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Factures</a></li>
+          <li><a href="fr/payment.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Paiement</a></li>
+        </ul>
+      </div>
+
+      <!-- Administration -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-slate-100 rounded-xl">
+            <i class="fas fa-cog text-slate-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Administration</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/reports.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Rapports</a></li>
+          <li><a href="fr/audit.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Journal d'audit</a></li>
+          <li><a href="fr/centers.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Centres</a></li>
+          <li><a href="fr/center-settings.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Paramètres centre</a></li>
+        </ul>
+      </div>
+
+      <!-- Paramètres -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-gray-100 rounded-xl">
+            <i class="fas fa-sliders-h text-gray-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Paramètres</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/settings.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Paramètres</a></li>
+          <li><a href="fr/templates.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Modèles</a></li>
+          <li><a href="fr/subscription.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Abonnement</a></li>
+          <li><a href="fr/profile.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Profil</a></li>
+        </ul>
+      </div>
+
+      <!-- Portail Parent -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-violet-100 rounded-xl">
+            <i class="fas fa-user-friends text-violet-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Portail Parent</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/parent.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Portail parent</a></li>
+          <li><a href="fr/parent-mobile.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Mobile parent</a></li>
+        </ul>
+      </div>
+
+      <!-- Modes spéciaux -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 card-hover transition-all">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 bg-orange-100 rounded-xl">
+            <i class="fas fa-tablet-alt text-orange-600 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Modes spéciaux</h3>
+        </div>
+        <ul class="space-y-2">
+          <li><a href="fr/kiosk.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Kiosque</a></li>
+          <li><a href="fr/offline.html" class="text-gray-600 hover:text-brand-blue flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-gray-400"></i>Hors-ligne</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8 mt-12">
+    <div class="container mx-auto px-6 text-center">
+      <p class="text-gray-400">© 2024 KIDVERSE - Application de gestion pour garderies</p>
+      <p class="text-gray-500 text-sm mt-2">Développé avec ❤️ par GALYLÉ Technologies Inc.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

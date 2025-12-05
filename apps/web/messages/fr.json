@@ -1,0 +1,258 @@
+{
+  "common": {
+    "appName": "KIDVERSE",
+    "tagline": "L'univers intelligent qui grandit avec vos enfants",
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "export": "Exporter",
+    "import": "Importer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non",
+    "all": "Tous",
+    "none": "Aucun",
+    "actions": "Actions",
+    "status": "Statut",
+    "date": "Date",
+    "time": "Heure",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "tomorrow": "Demain"
+  },
+  "auth": {
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "register": "S'inscrire",
+    "forgotPassword": "Mot de passe oublié ?",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "email": "Adresse email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "loginTitle": "Connexion à KIDVERSE",
+    "loginSubtitle": "Entrez vos identifiants pour accéder à votre espace",
+    "registerTitle": "Créer un compte",
+    "registerSubtitle": "Rejoignez l'écosystème KIDVERSE",
+    "errors": {
+      "invalidCredentials": "Email ou mot de passe incorrect",
+      "emailRequired": "L'email est requis",
+      "passwordRequired": "Le mot de passe est requis",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "emailInvalid": "Format d'email invalide"
+    }
+  },
+  "navigation": {
+    "home": "Accueil",
+    "dashboard": "Tableau de bord",
+    "children": "Enfants",
+    "staff": "Personnel",
+    "parents": "Parents",
+    "attendance": "Présences",
+    "health": "Santé",
+    "pedagogy": "Pédagogie",
+    "finance": "Finances",
+    "reports": "Rapports",
+    "settings": "Paramètres",
+    "help": "Aide",
+    "centers": "Centres",
+    "calendar": "Calendrier",
+    "messages": "Messages",
+    "notifications": "Notifications"
+  },
+  "roles": {
+    "admin": "Administrateur",
+    "director": "Directeur",
+    "educator": "Éducateur",
+    "parent": "Parent",
+    "staff": "Personnel"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue, {name}",
+    "overview": "Vue d'ensemble",
+    "quickActions": "Actions rapides",
+    "recentActivity": "Activité récente",
+    "stats": {
+      "childrenPresent": "Enfants présents",
+      "totalChildren": "Enfants inscrits",
+      "staffPresent": "Personnel présent",
+      "occupancyRate": "Taux d'occupation",
+      "pendingPayments": "Paiements en attente",
+      "monthlyRevenue": "Revenus mensuels",
+      "activeAlerts": "Alertes actives"
+    },
+    "parent": {
+      "title": "Tableau de bord Parent",
+      "myChildren": "Mes enfants",
+      "todayActivities": "Activités du jour",
+      "upcomingEvents": "Événements à venir",
+      "messages": "Messages",
+      "payments": "Paiements",
+      "photos": "Photos du jour"
+    },
+    "educator": {
+      "title": "Tableau de bord Éducateur",
+      "myGroup": "Mon groupe",
+      "attendance": "Présences",
+      "activities": "Activités",
+      "observations": "Observations",
+      "meals": "Repas",
+      "naps": "Siestes"
+    },
+    "director": {
+      "title": "Tableau de bord Directeur",
+      "centerOverview": "Aperçu du centre",
+      "staffManagement": "Gestion du personnel",
+      "compliance": "Conformité",
+      "finances": "Finances"
+    }
+  },
+  "children": {
+    "title": "Gestion des enfants",
+    "addChild": "Ajouter un enfant",
+    "profile": "Profil",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "dateOfBirth": "Date de naissance",
+    "age": "Âge",
+    "gender": "Genre",
+    "group": "Groupe",
+    "enrollmentDate": "Date d'inscription",
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif",
+      "waitlist": "Liste d'attente",
+      "graduated": "Diplômé"
+    },
+    "tabs": {
+      "info": "Informations",
+      "health": "Santé",
+      "contacts": "Contacts",
+      "documents": "Documents",
+      "pedagogy": "Pédagogie",
+      "billing": "Facturation"
+    }
+  },
+  "health": {
+    "title": "Santé & Sécurité",
+    "allergies": "Allergies",
+    "medications": "Médicaments",
+    "vaccinations": "Vaccinations",
+    "emergencyContacts": "Contacts d'urgence",
+    "medicalNotes": "Notes médicales",
+    "dailyHealth": "Santé quotidienne",
+    "incidents": "Incidents",
+    "noAllergies": "Aucune allergie connue",
+    "addAllergy": "Ajouter une allergie",
+    "severity": {
+      "mild": "Légère",
+      "moderate": "Modérée",
+      "severe": "Sévère",
+      "lifeThreatening": "Vitale"
+    }
+  },
+  "attendance": {
+    "title": "Gestion des présences",
+    "checkIn": "Arrivée",
+    "checkOut": "Départ",
+    "present": "Présent",
+    "absent": "Absent",
+    "late": "En retard",
+    "pickedUp": "Récupéré",
+    "expectedArrival": "Arrivée prévue",
+    "actualArrival": "Arrivée réelle",
+    "expectedDeparture": "Départ prévu",
+    "actualDeparture": "Départ réel",
+    "authorizedPickup": "Personne autorisée",
+    "notes": "Notes"
+  },
+  "pedagogy": {
+    "title": "Pédagogie",
+    "activities": "Activités",
+    "observations": "Observations",
+    "milestones": "Étapes de développement",
+    "portfolio": "Portfolio",
+    "curriculum": "Programme",
+    "learningAreas": {
+      "cognitive": "Cognitif",
+      "social": "Social",
+      "emotional": "Émotionnel",
+      "physical": "Physique",
+      "language": "Langage",
+      "creative": "Créatif"
+    }
+  },
+  "finance": {
+    "title": "Finances",
+    "invoices": "Factures",
+    "payments": "Paiements",
+    "subsidies": "Subventions",
+    "createInvoice": "Créer une facture",
+    "amount": "Montant",
+    "dueDate": "Date d'échéance",
+    "paidDate": "Date de paiement",
+    "status": {
+      "pending": "En attente",
+      "paid": "Payé",
+      "overdue": "En retard",
+      "cancelled": "Annulé",
+      "refunded": "Remboursé"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "noNotifications": "Aucune notification",
+    "types": {
+      "attendance": "Présence",
+      "health": "Santé",
+      "payment": "Paiement",
+      "message": "Message",
+      "alert": "Alerte",
+      "reminder": "Rappel"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "profile": "Mon profil",
+    "security": "Sécurité",
+    "notifications": "Notifications",
+    "language": "Langue",
+    "theme": "Thème",
+    "center": "Centre",
+    "billing": "Facturation",
+    "integrations": "Intégrations",
+    "themes": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    }
+  },
+  "errors": {
+    "generic": "Une erreur est survenue",
+    "notFound": "Page non trouvée",
+    "unauthorized": "Accès non autorisé",
+    "forbidden": "Accès interdit",
+    "serverError": "Erreur serveur",
+    "networkError": "Erreur réseau",
+    "validation": "Erreur de validation"
+  },
+  "success": {
+    "saved": "Enregistré avec succès",
+    "deleted": "Supprimé avec succès",
+    "updated": "Mis à jour avec succès",
+    "created": "Créé avec succès",
+    "sent": "Envoyé avec succès"
+  }
+}
+
+

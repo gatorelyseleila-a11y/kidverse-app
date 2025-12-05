@@ -1,0 +1,51 @@
+version: '3.8'
+
+# Configuration de développement local
+# Utiliser avec: docker-compose -f docker-compose.dev.yml up -d
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: kidverse-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kidverse
+      POSTGRES_PASSWORD: kidverse_password
+      POSTGRES_DB: kidverse_db
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    container_name: kidverse-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  minio:
+    image: minio/minio:latest
+    container_name: kidverse-minio-dev
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio_access_key
+      MINIO_ROOT_PASSWORD: minio_secret_key
+    volumes:
+      - minio_dev_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  adminer:
+    image: adminer:latest
+    container_name: kidverse-adminer-dev
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_dev_data:
+  minio_dev_data:
+
+

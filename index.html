@@ -1,0 +1,2729 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KIDVERSE - Écosystème Intelligent de Garderie</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* ===== VARIABLES & RESET ===== */
+
+        :root {
+
+            /* Couleurs principales */
+
+            --primary-blue: #4A6FA5;
+
+            --secondary-blue: #6B8CBC;
+
+            --accent-orange: #FF914D;
+
+            --success-green: #28A745;
+
+            --premium-purple: #6F42C1;
+
+            --warning-yellow: #FFC107;
+
+            --danger-red: #DC3545;
+
+            
+
+            /* Couleurs neutres */
+
+            --dark: #343A40;
+
+            --gray-dark: #6C757D;
+
+            --gray: #ADB5BD;
+
+            --gray-light: #E9ECEF;
+
+            --gray-lighter: #F8F9FA;
+
+            --white: #FFFFFF;
+
+            
+
+            /* Effets */
+
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+
+            --shadow-primary: 0 4px 20px rgba(74, 111, 165, 0.2);
+
+            
+
+            /* Espacements */
+
+            --space-xs: 8px;
+
+            --space-sm: 16px;
+
+            --space-md: 24px;
+
+            --space-lg: 32px;
+
+            --space-xl: 48px;
+
+            --space-xxl: 64px;
+
+            
+
+            /* Bordures */
+
+            --radius-sm: 4px;
+
+            --radius-md: 8px;
+
+            --radius-lg: 16px;
+
+            --radius-xl: 24px;
+
+            --radius-pill: 999px;
+
+            
+
+            /* Transitions */
+
+            --transition-fast: 150ms ease;
+
+            --transition-normal: 250ms ease;
+
+            --transition-slow: 350ms ease;
+
+        }
+
+
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            line-height: 1.6;
+
+            color: var(--dark);
+
+            background-color: var(--gray-lighter);
+
+            overflow-x: hidden;
+
+        }
+
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding: 0 var(--space-md);
+
+        }
+
+
+
+        section {
+
+            padding: var(--space-xxl) 0;
+
+        }
+
+
+
+        h1, h2, h3, h4, h5 {
+
+            font-weight: 600;
+
+            line-height: 1.2;
+
+            margin-bottom: var(--space-md);
+
+        }
+
+
+
+        h1 {
+
+            font-size: 2.5rem;
+
+        }
+
+
+
+        h2 {
+
+            font-size: 2rem;
+
+            text-align: center;
+
+            color: var(--primary-blue);
+
+        }
+
+
+
+        h3 {
+
+            font-size: 1.5rem;
+
+        }
+
+
+
+        p {
+
+            margin-bottom: var(--space-sm);
+
+            color: var(--gray-dark);
+
+        }
+
+
+
+        a {
+
+            text-decoration: none;
+
+            color: inherit;
+
+            transition: var(--transition-normal);
+
+        }
+
+
+
+        ul {
+
+            list-style: none;
+
+        }
+
+
+
+        img {
+
+            max-width: 100%;
+
+            height: auto;
+
+        }
+
+
+
+        /* ===== BOUTONS ===== */
+
+        .btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: var(--space-xs);
+
+            padding: 12px 24px;
+
+            border-radius: var(--radius-md);
+
+            font-weight: 600;
+
+            font-size: 1rem;
+
+            cursor: pointer;
+
+            transition: var(--transition-normal);
+
+            border: none;
+
+            outline: none;
+
+        }
+
+
+
+        .btn-primary {
+
+            background-color: var(--primary-blue);
+
+            color: var(--white);
+
+        }
+
+
+
+        .btn-primary:hover {
+
+            background-color: var(--secondary-blue);
+
+            transform: translateY(-2px);
+
+            box-shadow: var(--shadow-primary);
+
+        }
+
+
+
+        .btn-accent {
+
+            background-color: var(--accent-orange);
+
+            color: var(--white);
+
+        }
+
+
+
+        .btn-accent:hover {
+
+            background-color: #ff7a33;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 4px 20px rgba(255, 145, 77, 0.3);
+
+        }
+
+
+
+        .btn-outline {
+
+            background-color: transparent;
+
+            color: var(--primary-blue);
+
+            border: 2px solid var(--primary-blue);
+
+        }
+
+
+
+        .btn-outline:hover {
+
+            background-color: var(--primary-blue);
+
+            color: var(--white);
+
+        }
+
+
+
+        .btn-sm {
+
+            padding: 8px 16px;
+
+            font-size: 0.875rem;
+
+        }
+
+
+
+        .btn-lg {
+
+            padding: 16px 32px;
+
+            font-size: 1.125rem;
+
+        }
+
+
+
+        /* ===== HEADER & NAVIGATION ===== */
+
+        header {
+
+            background-color: var(--white);
+
+            box-shadow: var(--shadow-sm);
+
+            position: fixed;
+
+            width: 100%;
+
+            top: 0;
+
+            z-index: 1000;
+
+        }
+
+
+
+        .navbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: var(--space-md) 0;
+
+        }
+
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: var(--space-xs);
+
+        }
+
+
+
+        .logo-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+
+            border-radius: var(--radius-md);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: var(--white);
+
+            font-weight: 700;
+
+            font-size: 1.25rem;
+
+        }
+
+
+
+        .logo-text {
+
+            font-size: 1.5rem;
+
+            font-weight: 700;
+
+            color: var(--primary-blue);
+
+        }
+
+
+
+        .logo-text span {
+
+            color: var(--accent-orange);
+
+        }
+
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: var(--space-lg);
+
+        }
+
+
+
+        .nav-links a {
+
+            font-weight: 500;
+
+            position: relative;
+
+            padding: 4px 0;
+
+        }
+
+
+
+        .nav-links a::after {
+
+            content: '';
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 0;
+
+            width: 0;
+
+            height: 2px;
+
+            background-color: var(--accent-orange);
+
+            transition: var(--transition-normal);
+
+        }
+
+
+
+        .nav-links a:hover::after,
+
+        .nav-links a.active::after {
+
+            width: 100%;
+
+        }
+
+
+
+        .nav-actions {
+
+            display: flex;
+
+            gap: var(--space-sm);
+
+        }
+
+
+
+        .mobile-toggle {
+
+            display: none;
+
+            font-size: 1.5rem;
+
+            cursor: pointer;
+
+            color: var(--primary-blue);
+
+        }
+
+
+
+        /* ===== HERO SECTION ===== */
+
+        .hero {
+
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.9), rgba(107, 140, 188, 0.9)),
+
+                        url('https://images.unsplash.com/photo-1516627145497-ae69578b5b84?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+
+            background-size: cover;
+
+            background-position: center;
+
+            color: var(--white);
+
+            padding: 180px 0 100px;
+
+            margin-top: 80px;
+
+            text-align: center;
+
+        }
+
+
+
+        .hero h1 {
+
+            font-size: 3rem;
+
+            margin-bottom: var(--space-md);
+
+            color: var(--white);
+
+        }
+
+
+
+        .hero p {
+
+            font-size: 1.25rem;
+
+            max-width: 700px;
+
+            margin: 0 auto var(--space-xl);
+
+            color: rgba(255, 255, 255, 0.9);
+
+        }
+
+
+
+        .hero-actions {
+
+            display: flex;
+
+            gap: var(--space-md);
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        /* ===== MODULES SECTION ===== */
+
+        .modules-section {
+
+            background-color: var(--white);
+
+        }
+
+
+
+        .modules-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: var(--space-lg);
+
+            margin-top: var(--space-xl);
+
+        }
+
+
+
+        .module-card {
+
+            background: var(--white);
+
+            border-radius: var(--radius-lg);
+
+            padding: var(--space-lg);
+
+            box-shadow: var(--shadow-md);
+
+            transition: var(--transition-normal);
+
+            border: 1px solid var(--gray-light);
+
+        }
+
+
+
+        .module-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow: var(--shadow-lg);
+
+        }
+
+
+
+        .module-icon {
+
+            width: 60px;
+
+            height: 60px;
+
+            border-radius: var(--radius-lg);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: var(--space-md);
+
+            font-size: 1.5rem;
+
+            color: var(--white);
+
+        }
+
+
+
+        .module-1 .module-icon { background-color: var(--primary-blue); }
+
+        .module-2 .module-icon { background-color: var(--success-green); }
+
+        .module-3 .module-icon { background-color: var(--accent-orange); }
+
+        .module-4 .module-icon { background-color: var(--premium-purple); }
+
+        .module-5 .module-icon { background-color: var(--warning-yellow); }
+
+        .module-6 .module-icon { background-color: var(--danger-red); }
+
+
+
+        .module-features {
+
+            margin: var(--space-md) 0;
+
+        }
+
+
+
+        .module-features li {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: var(--space-xs);
+
+            margin-bottom: var(--space-xs);
+
+            color: var(--gray-dark);
+
+        }
+
+
+
+        .module-features i {
+
+            color: var(--success-green);
+
+        }
+
+
+
+        /* ===== DASHBOARD PREVIEW ===== */
+
+        .dashboard-preview {
+
+            background-color: var(--gray-lighter);
+
+        }
+
+
+
+        .dashboard-tabs {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: var(--space-xs);
+
+            margin-bottom: var(--space-xl);
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        .tab-btn {
+
+            padding: var(--space-sm) var(--space-lg);
+
+            background: var(--white);
+
+            border: 2px solid var(--gray-light);
+
+            border-radius: var(--radius-pill);
+
+            cursor: pointer;
+
+            font-weight: 500;
+
+            transition: var(--transition-normal);
+
+        }
+
+
+
+        .tab-btn.active,
+
+        .tab-btn:hover {
+
+            background: var(--primary-blue);
+
+            color: var(--white);
+
+            border-color: var(--primary-blue);
+
+        }
+
+
+
+        .dashboard-content {
+
+            background: var(--white);
+
+            border-radius: var(--radius-lg);
+
+            padding: var(--space-xl);
+
+            box-shadow: var(--shadow-lg);
+
+            min-height: 500px;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+
+        .tab-pane {
+
+            display: none;
+
+        }
+
+
+
+        .tab-pane.active {
+
+            display: block;
+
+            animation: fadeIn 0.5s ease;
+
+        }
+
+
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; transform: translateY(10px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+
+
+        /* ===== BLOCKCHAIN SECTION ===== */
+
+        .blockchain-section {
+
+            background: linear-gradient(135deg, var(--dark), #2c3e50);
+
+            color: var(--white);
+
+        }
+
+
+
+        .blockchain-section h2 {
+
+            color: var(--white);
+
+        }
+
+
+
+        .blockchain-section p {
+
+            color: rgba(255, 255, 255, 0.8);
+
+        }
+
+
+
+        .blockchain-features {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: var(--space-lg);
+
+            margin-top: var(--space-xl);
+
+        }
+
+
+
+        .blockchain-card {
+
+            background: rgba(255, 255, 255, 0.1);
+
+            backdrop-filter: blur(10px);
+
+            border-radius: var(--radius-lg);
+
+            padding: var(--space-lg);
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            transition: var(--transition-normal);
+
+        }
+
+
+
+        .blockchain-card:hover {
+
+            transform: translateY(-5px);
+
+            background: rgba(255, 255, 255, 0.15);
+
+        }
+
+
+
+        .blockchain-icon {
+
+            font-size: 2.5rem;
+
+            margin-bottom: var(--space-md);
+
+            color: var(--accent-orange);
+
+        }
+
+
+
+        /* ===== PRICING SECTION ===== */
+
+        .pricing-section {
+
+            background-color: var(--white);
+
+        }
+
+
+
+        .pricing-cards {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: var(--space-lg);
+
+            margin-top: var(--space-xl);
+
+        }
+
+
+
+        .pricing-card {
+
+            background: var(--white);
+
+            border-radius: var(--radius-lg);
+
+            padding: var(--space-xl);
+
+            box-shadow: var(--shadow-md);
+
+            border: 2px solid var(--gray-light);
+
+            transition: var(--transition-normal);
+
+            position: relative;
+
+        }
+
+
+
+        .pricing-card.featured {
+
+            border-color: var(--accent-orange);
+
+            transform: scale(1.05);
+
+            box-shadow: var(--shadow-lg);
+
+        }
+
+
+
+        .pricing-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: var(--shadow-lg);
+
+        }
+
+
+
+        .pricing-badge {
+
+            position: absolute;
+
+            top: -12px;
+
+            right: var(--space-lg);
+
+            background: var(--accent-orange);
+
+            color: var(--white);
+
+            padding: 4px 12px;
+
+            border-radius: var(--radius-pill);
+
+            font-size: 0.75rem;
+
+            font-weight: 600;
+
+        }
+
+
+
+        .price {
+
+            font-size: 2.5rem;
+
+            font-weight: 700;
+
+            color: var(--primary-blue);
+
+            margin: var(--space-md) 0;
+
+        }
+
+
+
+        .price span {
+
+            font-size: 1rem;
+
+            color: var(--gray-dark);
+
+        }
+
+
+
+        .pricing-features {
+
+            margin: var(--space-lg) 0;
+
+        }
+
+
+
+        .pricing-features li {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: var(--space-xs);
+
+            margin-bottom: var(--space-sm);
+
+        }
+
+
+
+        .pricing-features i {
+
+            color: var(--success-green);
+
+        }
+
+
+
+        /* ===== FOOTER ===== */
+
+        footer {
+
+            background-color: var(--dark);
+
+            color: var(--white);
+
+            padding: var(--space-xxl) 0 var(--space-lg);
+
+        }
+
+
+
+        .footer-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: var(--space-xl);
+
+            margin-bottom: var(--space-xl);
+
+        }
+
+
+
+        .footer-col h3 {
+
+            color: var(--white);
+
+            margin-bottom: var(--space-lg);
+
+            font-size: 1.25rem;
+
+        }
+
+
+
+        .footer-links li {
+
+            margin-bottom: var(--space-sm);
+
+        }
+
+
+
+        .footer-links a {
+
+            color: var(--gray);
+
+            transition: var(--transition-fast);
+
+        }
+
+
+
+        .footer-links a:hover {
+
+            color: var(--white);
+
+            padding-left: var(--space-xs);
+
+        }
+
+
+
+        .social-links {
+
+            display: flex;
+
+            gap: var(--space-sm);
+
+            margin-top: var(--space-md);
+
+        }
+
+
+
+        .social-links a {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.1);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition: var(--transition-normal);
+
+        }
+
+
+
+        .social-links a:hover {
+
+            background: var(--accent-orange);
+
+            transform: translateY(-3px);
+
+        }
+
+
+
+        .copyright {
+
+            text-align: center;
+
+            padding-top: var(--space-lg);
+
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+            color: var(--gray);
+
+            font-size: 0.875rem;
+
+        }
+
+
+
+        /* ===== MOBILE RESPONSIVE ===== */
+
+        @media (max-width: 992px) {
+
+            h1 {
+
+                font-size: 2rem;
+
+            }
+
+            
+
+            h2 {
+
+                font-size: 1.75rem;
+
+            }
+
+            
+
+            .hero h1 {
+
+                font-size: 2.5rem;
+
+            }
+
+            
+
+            .pricing-card.featured {
+
+                transform: none;
+
+            }
+
+        }
+
+
+
+        @media (max-width: 768px) {
+
+            .nav-links,
+
+            .nav-actions {
+
+                display: none;
+
+            }
+
+            
+
+            .mobile-toggle {
+
+                display: block;
+
+            }
+
+            
+
+            .mobile-menu {
+
+                position: fixed;
+
+                top: 80px;
+
+                left: 0;
+
+                width: 100%;
+
+                background: var(--white);
+
+                box-shadow: var(--shadow-lg);
+
+                padding: var(--space-md);
+
+                transform: translateY(-100%);
+
+                opacity: 0;
+
+                visibility: hidden;
+
+                transition: var(--transition-normal);
+
+                z-index: 999;
+
+            }
+
+            
+
+            .mobile-menu.active {
+
+                transform: translateY(0);
+
+                opacity: 1;
+
+                visibility: visible;
+
+            }
+
+            
+
+            .mobile-links {
+
+                display: flex;
+
+                flex-direction: column;
+
+                gap: var(--space-sm);
+
+            }
+
+            
+
+            .mobile-links a {
+
+                padding: var(--space-sm);
+
+                border-bottom: 1px solid var(--gray-light);
+
+            }
+
+            
+
+            .mobile-actions {
+
+                display: flex;
+
+                gap: var(--space-sm);
+
+                margin-top: var(--space-md);
+
+            }
+
+            
+
+            .hero {
+
+                padding: 140px 0 60px;
+
+            }
+
+            
+
+            .hero h1 {
+
+                font-size: 2rem;
+
+            }
+
+            
+
+            .hero-actions {
+
+                flex-direction: column;
+
+                align-items: center;
+
+            }
+
+            
+
+            .hero-actions .btn {
+
+                width: 100%;
+
+                max-width: 300px;
+
+            }
+
+        }
+
+
+
+        @media (max-width: 480px) {
+
+            section {
+
+                padding: var(--space-xl) 0;
+
+            }
+
+            
+
+            h1 {
+
+                font-size: 1.75rem;
+
+            }
+
+            
+
+            h2 {
+
+                font-size: 1.5rem;
+
+            }
+
+            
+
+            .container {
+
+                padding: 0 var(--space-sm);
+
+            }
+
+        }
+
+
+
+        /* ===== ANIMATIONS ===== */
+
+        @keyframes float {
+
+            0%, 100% { transform: translateY(0); }
+
+            50% { transform: translateY(-10px); }
+
+        }
+
+
+
+        .floating {
+
+            animation: float 3s ease-in-out infinite;
+
+        }
+
+
+
+        /* ===== UTILITY CLASSES ===== */
+
+        .text-center { text-align: center; }
+
+        .text-accent { color: var(--accent-orange); }
+
+        .mt-1 { margin-top: var(--space-xs); }
+
+        .mt-2 { margin-top: var(--space-sm); }
+
+        .mt-3 { margin-top: var(--space-md); }
+
+        .mt-4 { margin-top: var(--space-lg); }
+
+        .mb-1 { margin-bottom: var(--space-xs); }
+
+        .mb-2 { margin-bottom: var(--space-sm); }
+
+        .mb-3 { margin-bottom: var(--space-md); }
+
+        .mb-4 { margin-bottom: var(--space-lg); }
+
+        .py-3 { padding: var(--space-md) 0; }
+
+        .px-3 { padding: 0 var(--space-md); }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+
+    <header>
+
+        <div class="container">
+
+            <nav class="navbar">
+
+                <div class="logo">
+
+                    <div class="logo-icon">K</div>
+
+                    <div class="logo-text">KID<span>VERSE</span></div>
+
+                </div>
+
+                
+
+                <div class="nav-links">
+
+                    <a href="#accueil" class="active">Accueil</a>
+
+                    <a href="#modules">Modules</a>
+
+                    <a href="#dashboard">Dashboard</a>
+
+                    <a href="#blockchain">Blockchain</a>
+
+                    <a href="#pricing">Tarifs</a>
+
+                </div>
+
+                
+
+                <div class="nav-actions">
+
+                    <button class="btn btn-outline">Se connecter</button>
+
+                    <button class="btn btn-primary">Démarrer l'essai</button>
+
+                </div>
+
+                
+
+                <div class="mobile-toggle" id="mobileToggle">
+
+                    <i class="fas fa-bars"></i>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+        
+
+        <!-- Mobile Menu -->
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <div class="container">
+
+                <div class="mobile-links">
+
+                    <a href="#accueil" class="active">Accueil</a>
+
+                    <a href="#modules">Modules</a>
+
+                    <a href="#dashboard">Dashboard</a>
+
+                    <a href="#blockchain">Blockchain</a>
+
+                    <a href="#pricing">Tarifs</a>
+
+                </div>
+
+                <div class="mobile-actions">
+
+                    <button class="btn btn-outline btn-sm">Connexion</button>
+
+                    <button class="btn btn-primary btn-sm">Essai gratuit</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- Hero Section -->
+
+    <section class="hero" id="accueil">
+
+        <div class="container">
+
+            <h1>L'univers intelligent qui grandit avec vos enfants</h1>
+
+            <p>La première plateforme SaaS complète de gestion de garderies, combinant pédagogie moderne, blockchain et intelligence artificielle pour transformer l'expérience des parents, éducateurs et directeurs.</p>
+
+            <div class="hero-actions">
+
+                <button class="btn btn-accent btn-lg">
+
+                    <i class="fas fa-rocket"></i> Démarrer l'essai gratuit
+
+                </button>
+
+                <button class="btn btn-outline btn-lg">
+
+                    <i class="fas fa-play-circle"></i> Voir la démo
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Modules Section -->
+
+    <section class="modules-section" id="modules">
+
+        <div class="container">
+
+            <h2>Modules Intégrés</h2>
+
+            <p class="text-center">38 tables de données unifiées dans une seule plateforme intuitive</p>
+
+            
+
+            <div class="modules-grid">
+
+                <!-- Module 1 -->
+
+                <div class="module-card module-1">
+
+                    <div class="module-icon">
+
+                        <i class="fas fa-home"></i>
+
+                    </div>
+
+                    <h3>Gestion des Centres</h3>
+
+                    <p>Gérez plusieurs centres avec licences, inspections et maintenance</p>
+
+                    <ul class="module-features">
+
+                        <li><i class="fas fa-check"></i> Licences et conformité</li>
+
+                        <li><i class="fas fa-check"></i> Inspections réglementaires</li>
+
+                        <li><i class="fas fa-check"></i> Maintenance préventive</li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <!-- Module 2 -->
+
+                <div class="module-card module-2">
+
+                    <div class="module-icon">
+
+                        <i class="fas fa-heartbeat"></i>
+
+                    </div>
+
+                    <h3>Santé & Sécurité</h3>
+
+                    <p>Suivi médical complet avec allergies, médicaments et profils santé</p>
+
+                    <ul class="module-features">
+
+                        <li><i class="fas fa-check"></i> Carnet vaccination digital</li>
+
+                        <li><i class="fas fa-check"></i> Gestion des allergies</li>
+
+                        <li><i class="fas fa-check"></i> Triage santé quotidien</li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <!-- Module 3 -->
+
+                <div class="module-card module-3">
+
+                    <div class="module-icon">
+
+                        <i class="fas fa-graduation-cap"></i>
+
+                    </div>
+
+                    <h3>Pédagogie</h3>
+
+                    <p>Curriculum, observations et portfolio d'apprentissage</p>
+
+                    <ul class="module-features">
+
+                        <li><i class="fas fa-check"></i> Activités pédagogiques</li>
+
+                        <li><i class="fas fa-check"></i> Observations structurées</li>
+
+                        <li><i class="fas fa-check"></i> Suivi des milestones</li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <!-- Module 4 -->
+
+                <div class="module-card module-4">
+
+                    <div class="module-icon">
+
+                        <i class="fas fa-calculator"></i>
+
+                    </div>
+
+                    <h3>Finances</h3>
+
+                    <p>Facturation automatisée avec subventions et paiements</p>
+
+                    <ul class="module-features">
+
+                        <li><i class="fas fa-check"></i> Facturation intelligente</li>
+
+                        <li><i class="fas fa-check"></i> Gestion subventions</li>
+
+                        <li><i class="fas fa-check"></i> Paiements blockchain</li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <!-- Module 5 -->
+
+                <div class="module-card module-5">
+
+                    <div class="module-icon">
+
+                        <i class="fas fa-users"></i>
+
+                    </div>
+
+                    <h3>Ressources Humaines</h3>
+
+                    <p>Gestion du personnel, qualifications et planning</p>
+
+                    <ul class="module-features">
+
+                        <li><i class="fas fa-check"></i> Qualifications staff</li>
+
+                        <li><i class="fas fa-check"></i> Planning équipes</li>
+
+                        <li><i class="fas fa-check"></i> Contrôle ratios temps réel</li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <!-- Module 6 -->
+
+                <div class="module-card module-6">
+
+                    <div class="module-icon">
+
+                        <i class="fas fa-shield-alt"></i>
+
+                    </div>
+
+                    <h3>Sécurité & Accès</h3>
+
+                    <p>Contrôle d'accès, monitoring et personnes autorisées</p>
+
+                    <ul class="module-features">
+
+                        <li><i class="fas fa-check"></i> Check-in/out sécurisé</li>
+
+                        <li><i class="fas fa-check"></i> Personnes autorisées</li>
+
+                        <li><i class="fas fa-check"></i> Audit trail complet</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Dashboard Preview -->
+
+    <section class="dashboard-preview" id="dashboard">
+
+        <div class="container">
+
+            <h2>Dashboard Intelligent</h2>
+
+            <p class="text-center">Interface unifiée adaptée à chaque rôle</p>
+
+            
+
+            <div class="dashboard-tabs">
+
+                <button class="tab-btn active" data-tab="parent">Parents</button>
+
+                <button class="tab-btn" data-tab="educator">Éducateurs</button>
+
+                <button class="tab-btn" data-tab="director">Directeurs</button>
+
+                <button class="tab-btn" data-tab="admin">Administrateurs</button>
+
+            </div>
+
+            
+
+            <div class="dashboard-content">
+
+                <!-- Parent Dashboard -->
+
+                <div class="tab-pane active" id="parent-tab">
+
+                    <div class="dashboard-header">
+
+                        <h3>Tableau de Bord Parent</h3>
+
+                        <p>Bienvenue, Famille Dupont</p>
+
+                    </div>
+
+                    <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md); margin-top: var(--space-lg);">
+
+                        <div class="dashboard-card" style="background: var(--white); padding: var(--space-md); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <h4>Lucas (3 ans)</h4>
+
+                            <p>Présent aujourd'hui</p>
+
+                            <div class="stats" style="margin-top: var(--space-sm);">
+
+                                <div style="display: flex; justify-content: space-between;">
+
+                                    <span>Activités:</span>
+
+                                    <span>3 terminées</span>
+
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; margin-top: var(--space-xs);">
+
+                                    <span>Repas:</span>
+
+                                    <span>🍎 🥕 🥛</span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="dashboard-card" style="background: var(--white); padding: var(--space-md); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <h4>Messages</h4>
+
+                            <p>2 non lus</p>
+
+                            <button class="btn btn-sm btn-primary" style="margin-top: var(--space-sm); width: 100%;">
+
+                                Voir les messages
+
+                            </button>
+
+                        </div>
+
+                        <div class="dashboard-card" style="background: var(--white); padding: var(--space-md); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <h4>Prochain paiement</h4>
+
+                            <p class="text-accent" style="font-size: 1.5rem; font-weight: 600;">$450.00</p>
+
+                            <p>Échéance: 15 mars</p>
+
+                        </div>
+
+                        <div class="dashboard-card" style="background: var(--white); padding: var(--space-md); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <h4>Photos du jour</h4>
+
+                            <p>4 nouvelles photos</p>
+
+                            <button class="btn btn-sm btn-outline" style="margin-top: var(--space-sm); width: 100%;">
+
+                                <i class="fas fa-images"></i> Voir l'album
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+
+                <!-- Educator Dashboard -->
+
+                <div class="tab-pane" id="educator-tab">
+
+                    <div class="dashboard-header">
+
+                        <h3>Tableau de Bord Éducateur</h3>
+
+                        <p>Bonjour, Marie - Groupe des Bambins</p>
+
+                    </div>
+
+                    <div class="quick-actions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-sm); margin-top: var(--space-lg);">
+
+                        <button class="btn btn-sm btn-accent">
+
+                            <i class="fas fa-plus"></i> Nouvelle observation
+
+                        </button>
+
+                        <button class="btn btn-sm btn-primary">
+
+                            <i class="fas fa-camera"></i> Prendre photo
+
+                        </button>
+
+                        <button class="btn btn-sm btn-success">
+
+                            <i class="fas fa-utensils"></i> Marquer repas
+
+                        </button>
+
+                        <button class="btn btn-sm btn-warning">
+
+                            <i class="fas fa-bed"></i> Sieste
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                
+
+                <!-- Director Dashboard -->
+
+                <div class="tab-pane" id="director-tab">
+
+                    <div class="dashboard-header">
+
+                        <h3>Tableau de Bord Directeur</h3>
+
+                        <p>Centre Éducatif Les Petits Explorateurs</p>
+
+                    </div>
+
+                    <div class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-md); margin-top: var(--space-lg);">
+
+                        <div style="text-align: center; padding: var(--space-md); background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary-blue);">48</div>
+
+                            <div style="font-size: 0.875rem; color: var(--gray-dark);">Enfants inscrits</div>
+
+                        </div>
+
+                        <div style="text-align: center; padding: var(--space-md); background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--success-green);">92%</div>
+
+                            <div style="font-size: 0.875rem; color: var(--gray-dark);">Taux d'occupation</div>
+
+                        </div>
+
+                        <div style="text-align: center; padding: var(--space-md); background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--warning-yellow);">$24.5K</div>
+
+                            <div style="font-size: 0.875rem; color: var(--gray-dark);">Revenus mensuels</div>
+
+                        </div>
+
+                        <div style="text-align: center; padding: var(--space-md); background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--danger-red);">2</div>
+
+                            <div style="font-size: 0.875rem; color: var(--gray-dark);">Alertes actives</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+
+                <!-- Admin Dashboard -->
+
+                <div class="tab-pane" id="admin-tab">
+
+                    <div class="dashboard-header">
+
+                        <h3>Tableau de Bord Administrateur</h3>
+
+                        <p>Multi-centres • Vue globale</p>
+
+                    </div>
+
+                    <div class="admin-stats" style="margin-top: var(--space-lg);">
+
+                        <div style="background: var(--white); padding: var(--space-md); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+
+                            <h4>Centres actifs: 8</h4>
+
+                            <p>Total enfants: 384</p>
+
+                            <p>Éducateurs: 72</p>
+
+                            <button class="btn btn-sm btn-primary mt-2">
+
+                                <i class="fas fa-chart-bar"></i> Voir rapports détaillés
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Blockchain Section -->
+
+    <section class="blockchain-section" id="blockchain">
+
+        <div class="container">
+
+            <h2>Blockchain & Sécurité</h2>
+
+            <p class="text-center">Identité numérique sécurisée et données immuables</p>
+
+            
+
+            <div class="blockchain-features">
+
+                <div class="blockchain-card">
+
+                    <div class="blockchain-icon">
+
+                        <i class="fas fa-fingerprint"></i>
+
+                    </div>
+
+                    <h3>Identité Numérique</h3>
+
+                    <p>Portefeuille blockchain unique pour chaque enfant avec consentements granularisés</p>
+
+                </div>
+
+                
+
+                <div class="blockchain-card">
+
+                    <div class="blockchain-icon">
+
+                        <i class="fas fa-shield-alt"></i>
+
+                    </div>
+
+                    <h3>Données Immuables</h3>
+
+                    <p>Transactions sécurisées et journal d'audit infalsifiable sur blockchain Polygon</p>
+
+                </div>
+
+                
+
+                <div class="blockchain-card">
+
+                    <div class="blockchain-icon">
+
+                        <i class="fas fa-file-contract"></i>
+
+                    </div>
+
+                    <h3>Contrats Intelligents</h3>
+
+                    <p>Facturation automatique et gestion des subventions via smart contracts</p>
+
+                </div>
+
+                
+
+                <div class="blockchain-card">
+
+                    <div class="blockchain-icon">
+
+                        <i class="fas fa-qrcode"></i>
+
+                    </div>
+
+                    <h3>Vérification Instantanée</h3>
+
+                    <p>Scan QR pour vérifier certifications, consentements et transactions</p>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="text-center mt-4">
+
+                <button class="btn btn-accent btn-lg">
+
+                    <i class="fas fa-bolt"></i> Découvrir la technologie
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Pricing Section -->
+
+    <section class="pricing-section" id="pricing">
+
+        <div class="container">
+
+            <h2>Plans Tarifaires</h2>
+
+            <p class="text-center">Choisissez le plan adapté à vos besoins</p>
+
+            
+
+            <div class="pricing-cards">
+
+                <!-- Plan Essentiel -->
+
+                <div class="pricing-card">
+
+                    <h3>Essentiel</h3>
+
+                    <p>Pour petites garderies</p>
+
+                    <div class="price">$199<span>/mois</span></div>
+
+                    <ul class="pricing-features">
+
+                        <li><i class="fas fa-check"></i> Jusqu'à 25 enfants</li>
+
+                        <li><i class="fas fa-check"></i> Gestion de base</li>
+
+                        <li><i class="fas fa-check"></i> Messagerie parents</li>
+
+                        <li><i class="fas fa-check"></i> Facturation simple</li>
+
+                        <li><i class="fas fa-check"></i> Support email</li>
+
+                    </ul>
+
+                    <button class="btn btn-outline" style="width: 100%;">
+
+                        Commencer
+
+                    </button>
+
+                </div>
+
+                
+
+                <!-- Plan Professionnel -->
+
+                <div class="pricing-card featured">
+
+                    <div class="pricing-badge">POPULAIRE</div>
+
+                    <h3>Professionnel</h3>
+
+                    <p>Pour garderies établies</p>
+
+                    <div class="price">$399<span>/mois</span></div>
+
+                    <ul class="pricing-features">
+
+                        <li><i class="fas fa-check"></i> Jusqu'à 100 enfants</li>
+
+                        <li><i class="fas fa-check"></i> Tous les modules</li>
+
+                        <li><i class="fas fa-check"></i> Blockchain incluse</li>
+
+                        <li><i class="fas fa-check"></i> Multi-centres</li>
+
+                        <li><i class="fas fa-check"></i> Support prioritaire</li>
+
+                        <li><i class="fas fa-check"></i> Formation intégrée</li>
+
+                    </ul>
+
+                    <button class="btn btn-primary" style="width: 100%;">
+
+                        <i class="fas fa-star"></i> Choisir ce plan
+
+                    </button>
+
+                </div>
+
+                
+
+                <!-- Plan Entreprise -->
+
+                <div class="pricing-card">
+
+                    <h3>Entreprise</h3>
+
+                    <p>Pour réseaux de garderies</p>
+
+                    <div class="price">$899<span>/mois</span></div>
+
+                    <ul class="pricing-features">
+
+                        <li><i class="fas fa-check"></i> Enfants illimités</li>
+
+                        <li><i class="fas fa-check"></i> API complète</li>
+
+                        <li><i class="fas fa-check"></i> White-label</li>
+
+                        <li><i class="fas fa-check"></i> Analytics avancés</li>
+
+                        <li><i class="fas fa-check"></i> Gestionnaire dédié</li>
+
+                        <li><i class="fas fa-check"></i> Intégrations sur mesure</li>
+
+                    </ul>
+
+                    <button class="btn btn-outline" style="width: 100%;">
+
+                        Nous contacter
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-col">
+
+                    <div class="logo">
+
+                        <div class="logo-icon">K</div>
+
+                        <div class="logo-text">KID<span>VERSE</span></div>
+
+                    </div>
+
+                    <p class="mt-2">L'univers intelligent qui grandit avec vos enfants.</p>
+
+                    <div class="social-links">
+
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+
+                    </div>
+
+                </div>
+
+                
+
+                <div class="footer-col">
+
+                    <h3>Modules</h3>
+
+                    <ul class="footer-links">
+
+                        <li><a href="#">Gestion Centres</a></li>
+
+                        <li><a href="#">Santé & Sécurité</a></li>
+
+                        <li><a href="#">Pédagogie</a></li>
+
+                        <li><a href="#">Finances</a></li>
+
+                        <li><a href="#">Ressources Humaines</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div class="footer-col">
+
+                    <h3>Ressources</h3>
+
+                    <ul class="footer-links">
+
+                        <li><a href="#">Documentation</a></li>
+
+                        <li><a href="#">Centre d'aide</a></li>
+
+                        <li><a href="#">Blog</a></li>
+
+                        <li><a href="#">Webinaires</a></li>
+
+                        <li><a href="#">Statut du service</a></li>
+
+                    </ul>
+
+                </div>
+
+                
+
+                <div class="footer-col">
+
+                    <h3>Entreprise</h3>
+
+                    <ul class="footer-links">
+
+                        <li><a href="#">À propos</a></li>
+
+                        <li><a href="#">Carrières</a></li>
+
+                        <li><a href="#">Partenaires</a></li>
+
+                        <li><a href="#">Presse</a></li>
+
+                        <li><a href="#">Contact</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="copyright">
+
+                <p>&copy; 2024 KIDVERSE. Tous droits réservés. | <a href="#" style="color: var(--accent-orange);">Politique de confidentialité</a> | <a href="#" style="color: var(--accent-orange);">Conditions d'utilisation</a></p>
+
+                <p class="mt-1">Solution développée par GALYLÉ Technologies Inc.</p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <script>
+
+        // ===== MOBILE MENU TOGGLE =====
+
+        const mobileToggle = document.getElementById('mobileToggle');
+
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        
+
+        mobileToggle.addEventListener('click', () => {
+
+            mobileMenu.classList.toggle('active');
+
+            mobileToggle.innerHTML = mobileMenu.classList.contains('active') 
+
+                ? '<i class="fas fa-times"></i>' 
+
+                : '<i class="fas fa-bars"></i>';
+
+        });
+
+        
+
+        // Close mobile menu when clicking on a link
+
+        document.querySelectorAll('.mobile-links a').forEach(link => {
+
+            link.addEventListener('click', () => {
+
+                mobileMenu.classList.remove('active');
+
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+
+            });
+
+        });
+
+        
+
+        // ===== DASHBOARD TABS =====
+
+        const tabBtns = document.querySelectorAll('.tab-btn');
+
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        
+
+        tabBtns.forEach(btn => {
+
+            btn.addEventListener('click', () => {
+
+                // Remove active class from all buttons and panes
+
+                tabBtns.forEach(b => b.classList.remove('active'));
+
+                tabPanes.forEach(p => p.classList.remove('active'));
+
+                
+
+                // Add active class to clicked button
+
+                btn.classList.add('active');
+
+                
+
+                // Show corresponding tab pane
+
+                const tabId = btn.getAttribute('data-tab');
+
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+
+            });
+
+        });
+
+        
+
+        // ===== SMOOTH SCROLL =====
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function(e) {
+
+                e.preventDefault();
+
+                
+
+                const targetId = this.getAttribute('href');
+
+                if(targetId === '#') return;
+
+                
+
+                const targetElement = document.querySelector(targetId);
+
+                if(targetElement) {
+
+                    // Close mobile menu if open
+
+                    mobileMenu.classList.remove('active');
+
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+
+                    
+
+                    // Scroll to target
+
+                    window.scrollTo({
+
+                        top: targetElement.offsetTop - 80,
+
+                        behavior: 'smooth'
+
+                    });
+
+                }
+
+            });
+
+        });
+
+        
+
+        // ===== ACTIVE NAV LINK ON SCROLL =====
+
+        const sections = document.querySelectorAll('section');
+
+        const navLinks = document.querySelectorAll('.nav-links a, .mobile-links a');
+
+        
+
+        window.addEventListener('scroll', () => {
+
+            let current = '';
+
+            
+
+            sections.forEach(section => {
+
+                const sectionTop = section.offsetTop;
+
+                const sectionHeight = section.clientHeight;
+
+                
+
+                if(scrollY >= (sectionTop - 100)) {
+
+                    current = section.getAttribute('id');
+
+                }
+
+            });
+
+            
+
+            navLinks.forEach(link => {
+
+                link.classList.remove('active');
+
+                if(link.getAttribute('href') === `#${current}`) {
+
+                    link.classList.add('active');
+
+                }
+
+            });
+
+        });
+
+        
+
+        // ===== DEMO BUTTONS =====
+
+        document.querySelectorAll('.btn').forEach(button => {
+
+            button.addEventListener('click', function(e) {
+
+                if(this.textContent.includes('Démarrer l\'essai') || 
+
+                   this.textContent.includes('Essai gratuit')) {
+
+                    e.preventDefault();
+
+                    alert('🎉 Bienvenue dans KIDVERSE !\n\nVotre essai gratuit de 14 jours commence maintenant. Vous allez être redirigé vers le tableau de bord de démonstration.');
+
+                    
+
+                    // Simulate loading
+
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Chargement...';
+
+                    this.disabled = true;
+
+                    
+
+                    setTimeout(() => {
+
+                        window.location.href = '#dashboard';
+
+                        this.innerHTML = '<i class="fas fa-rocket"></i> Démarrer l\'essai gratuit';
+
+                        this.disabled = false;
+
+                    }, 1500);
+
+                }
+
+                
+
+                if(this.textContent.includes('Voir la démo')) {
+
+                    e.preventDefault();
+
+                    // Switch to educator tab for demo
+
+                    tabBtns.forEach(b => b.classList.remove('active'));
+
+                    tabPanes.forEach(p => p.classList.remove('active'));
+
+                    
+
+                    document.querySelector('.tab-btn[data-tab="educator"]').classList.add('active');
+
+                    document.getElementById('educator-tab').classList.add('active');
+
+                    
+
+                    // Scroll to dashboard
+
+                    window.scrollTo({
+
+                        top: document.getElementById('dashboard').offsetTop - 80,
+
+                        behavior: 'smooth'
+
+                    });
+
+                }
+
+            });
+
+        });
+
+        
+
+        // ===== ANIMATION ON SCROLL =====
+
+        const observerOptions = {
+
+            threshold: 0.1,
+
+            rootMargin: '0px 0px -50px 0px'
+
+        };
+
+        
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting) {
+
+                    entry.target.style.opacity = 1;
+
+                    entry.target.style.transform = 'translateY(0)';
+
+                }
+
+            });
+
+        }, observerOptions);
+
+        
+
+        // Observe all modules and blockchain cards
+
+        document.querySelectorAll('.module-card, .blockchain-card').forEach(card => {
+
+            card.style.opacity = 0;
+
+            card.style.transform = 'translateY(20px)';
+
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+            observer.observe(card);
+
+        });
+
+        
+
+        // ===== SIMULATED DATA UPDATES =====
+
+        function updateDashboardStats() {
+
+            // Simulate real-time updates
+
+            const stats = document.querySelectorAll('.dashboard-card .stats');
+
+            stats.forEach(stat => {
+
+                // Random updates
+
+                if(Math.random() > 0.7) {
+
+                    stat.style.transform = 'scale(1.05)';
+
+                    setTimeout(() => {
+
+                        stat.style.transform = 'scale(1)';
+
+                    }, 300);
+
+                }
+
+            });
+
+        }
+
+        
+
+        // Update every 10 seconds
+
+        setInterval(updateDashboardStats, 10000);
+
+        
+
+        // ===== INITIALIZE =====
+
+        window.addEventListener('DOMContentLoaded', () => {
+
+            // Add active class to first nav link
+
+            document.querySelector('.nav-links a').classList.add('active');
+
+            
+
+            // Add hover effects to pricing cards
+
+            document.querySelectorAll('.pricing-card').forEach(card => {
+
+                card.addEventListener('mouseenter', function() {
+
+                    if(!this.classList.contains('featured')) {
+
+                        this.style.transform = 'translateY(-10px)';
+
+                    }
+
+                });
+
+                
+
+                card.addEventListener('mouseleave', function() {
+
+                    if(!this.classList.contains('featured')) {
+
+                        this.style.transform = 'translateY(0)';
+
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+
+

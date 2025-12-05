@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santé | KIDVERSE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { 'brand-blue': '#2563EB', 'brand-blue-dark': '#1D4ED8' }}}}</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <script src="../js/navigation.js"></script>
+  
+  <main class="p-6">
+    
+    <div class="mb-6">
+      <nav class="text-sm text-gray-500 mb-2">
+        <a href="../index.html" class="hover:text-brand-blue">Accueil</a> / 
+        <span class="text-gray-900">Santé</span>
+      </nav>
+      <h1 class="text-2xl font-bold text-gray-900">Santé</h1>
+      <p class="text-gray-500">Catégorie: Santé</p>
+    </div>
+    
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+      <div class="text-center">
+        <div class="w-20 h-20 bg-brand-blue/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-heart text-brand-blue text-3xl"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">Santé</h2>
+        <p class="text-gray-500 mb-6">Cette page est en cours de développement.</p>
+        <a href="dashboard.html" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-blue text-white rounded-xl hover:bg-brand-blue-dark transition-colors">
+          <i class="fas fa-arrow-left"></i>
+          Retour au tableau de bord
+        </a>
+      </div>
+    </div>
+    
+  </main>
+
+  <script>initNavigation('health', 'Santé', 'Santé');</script>
+</body>
+</html>
