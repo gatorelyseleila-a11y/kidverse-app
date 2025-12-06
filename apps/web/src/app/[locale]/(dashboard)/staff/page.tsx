@@ -186,7 +186,7 @@ export default function StaffPage() {
     return matchesSearch && matchesDepartment && matchesStatus;
   });
 
-  const departments = [...new Set(staff.map(s => s.department).filter(Boolean))];
+  const departments = Array.from(new Set(staff.map(s => s.department).filter(Boolean)));
   
   const stats = {
     total: staff.length,
