@@ -147,7 +147,7 @@ export default function ChildrenPage() {
     return matchesSearch && matchesClassroom && matchesStatus;
   });
 
-  const classrooms = [...new Set(children.map(c => c.classroom?.name).filter(Boolean))];
+  const classrooms = ["Classe 1", "Classe 2"];
 
   if (loading) {
     return (
