@@ -1,0 +1,2 @@
+﻿// Fichier staff/page.tsx corrigé temporairement
+const departments = Array.from(new Set(staff.map(s => s.department).filter(Boolean)));
